@@ -27,13 +27,14 @@
 # The current user is: your_name$
 # $
 
+touch show-info.sh
+chmod +x show-info.sh
+
 cat > show-info.sh <<'EOF'
 #!/bin/bash
-cat -e <<'EOL'
-The current directory is: \$PWD
-The default paths are: \$PATH
-The current user is: \$USERNAME
+cat -e <<EOL
+The current directory is: $PWD
+The default paths are: $PATH
+The current user is: $USERNAME
 EOL
 EOF
-
-chmod +x show-info.sh
