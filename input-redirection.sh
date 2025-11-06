@@ -30,9 +30,9 @@
 cat > show-info.sh <<'EOF'
 #!/bin/bash
 cat -e <<'EOL'
-The current directory is: $PWD$
-The default paths are: $PATH$
-The current user is: $USERNAME$
+The current directory is: \$PWD
+The default paths are: \$PATH
+The current user is: \$USERNAME
 EOL
 EOF
 
