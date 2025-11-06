@@ -53,4 +53,4 @@
 # "Always on Time" - Ja Rule featuring Ashanti
 # $
 
-cat songs.txt | grep '" - J' >> result.txt
+cat songs.txt | grep '" - J' && echo "" >> result.txt
