@@ -62,37 +62,37 @@ if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
 fi
 
 do_add() {
-  echo $((num1 + num2))
+  echo $(($1 + $2))
 }
 
 do_sub() {
-  echo $((num1 - num2))
+  echo $(($1 - $2))
 }
 
 do_mult() {
-  echo $((num1 * num2))
+  echo $(($1 * $2))
 }
 
 do_divide() {
-  if [ $num2 -eq 0 ]; then
+  if [ $2 -eq 0 ]; then
     echo "Error: division by 0" >&2
     exit 2
   fi
-  echo $((num1 / num2))
+  echo $(($1 / $2))
 }
 
-case $2 in
+case $operator in
   +) 
-    do_add
+    do_add "$num1" "$num2"
     ;;
   -) 
-    do_sub
+    do_sub "$num1" "$num2"
     ;;
   \*) 
-    do_mult
+    do_mult "$num1" "$num2"
     ;;
   /) 
-    do_divide
+    do_divide "$num1" "$num2"
     ;;  
   *) 
     echo "Error: invalid operator" >&2
