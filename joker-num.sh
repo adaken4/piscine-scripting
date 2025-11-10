@@ -63,37 +63,42 @@
 # Go up
 # You lost, the number was 100
 
-if [ $# -ne 1 ] || ! [[ "$1" =~ ^[0-9]+$ ]] || [ "$1" -lt 1 ] || [ "$1" -gt 100 ]; then
-  echo "Error: wrong argument" >&2
-  exit 1
+if [ $# -ne 1 ]; then
+    echo "Error: wrong argument"
+    exit 1
 fi
 
-secret_number=$1
-max_tries=5
+secret="$1"
 
-for (( attempt=1; attempt<=max_tries; attempt++ )); do
-  tries_left=$((max_tries - attempt + 1))
-  echo "Enter your guess ($tries_left tries left):"
-  read guess
+if ! [[ "$secret" =~ ^[0-9]+$ ]] || [ "$secret" -lt 1 ] || [ "$secret" -gt 100 ]; then
+    echo "Error: wrong argument"
+    exit 1
+fi
 
-  if [[ -z "$guess" ]] || ! [[ "$guess" =~ ^[0-9]+$ ]]; then
-    (( attempt-- ))
-    continue
-  fi
+for (( i=1; i<=5; )); do
+    tries_left=$((5 - i + 1))
+    echo "Enter your guess ($tries_left tries left):"
+    read guess
 
-  if [ "$guess" -lt 1 ] || [ "$guess" -gt 100 ]; then
-    (( attempt-- ))
-    continue
-  fi
+    if [[ -z "$guess" ]] || ! [[ "$guess" =~ ^[0-9]+$ ]]; then
+        continue
+    fi
+    
+   
+    if [ "$guess" -lt 1 ] || [ "$guess" -gt 100 ]; then
+        continue
+    fi
 
-  if (( guess == secret_number )); then
-    echo "Congratulations, you found the number in $attempt moves!"
-    exit 0
-  elif (( guess < secret_number )); then
-    echo "Go up"
-  else
-    echo "Go down"
-  fi
+    if (( guess == secret )); then
+        echo "Congratulations, you found the number in $i moves!"
+        exit 0
+    elif (( guess < secret )); then
+        echo "Go up"
+    else
+        echo "Go down"
+    fi
+
+    ((i++)) 
 done
 
-echo "You lost, the number was $secret_number"
+echo "You lost, the number was $secret"
