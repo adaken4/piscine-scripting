@@ -31,8 +31,11 @@ def clean_list(items):
     for index, item in enumerate(items, start=1):
         cleaned_item = item.strip().capitalize()
         cleaned_items.append(f"{index}/ {cleaned_item}")
+        
+    # Check if "Milk" is already in the cleaned list
+    has_milk = any("Milk" in cleaned_item for cleaned_item in cleaned_items)
     
-    if 'Milk' not in [item.capitalize() for item in items]:
+    if not has_milk:
         cleaned_items.append(f"{len(cleaned_items) + 1}/ Milk")
     
     return cleaned_items
