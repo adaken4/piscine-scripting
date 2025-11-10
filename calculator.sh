@@ -56,7 +56,7 @@ if [ $# -ne 3 ]; then
   exit 1
 fi
 
-if ! test "$num1" -eq "$num1" -o "$num2" -eq "$num2"; then
+if ! [[ "$num1" =~ ^-?[0-9]+$ ]] || ! [[ "$num2" =~ ^-?[0-9]+$ ]]; then
   echo "Error: invalid number" >&2
   exit 4
 fi
