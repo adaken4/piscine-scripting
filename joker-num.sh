@@ -69,17 +69,20 @@ if [ $# -ne 1 ] || ! [[ "$1" =~ ^[0-9]+$ ]] || [ "$1" -lt 1 ] || [ "$1" -gt 100 
 fi
 
 secret_number=$1
-tries=5
+max_tries=5
 
-for (( attempt=1; attempt<=tries; attempt++)); do
-  tries_left=$((tries - attempt + 1))
+for (( attempt=1; attempt<=max_tries; attempt++ )); do
+  tries_left=$((max_tries - attempt + 1))
+  echo "Enter your guess ($tries_left tries left):"
   read guess
 
-  if [[ -z "$guess"]] || ! [[ "$guess" =~ ^[0-9]+$ ]]; then
+  if [[ -z "$guess" ]] || ! [[ "$guess" =~ ^[0-9]+$ ]]; then
+    (( attempt-- ))
     continue
   fi
 
   if [ "$guess" -lt 1 ] || [ "$guess" -gt 100 ]; then
+    (( attempt-- ))
     continue
   fi
 
@@ -91,8 +94,6 @@ for (( attempt=1; attempt<=tries; attempt++)); do
   else
     echo "Go down"
   fi
-
-  (( attempt++ ))
 done
 
 echo "You lost, the number was $secret_number"
