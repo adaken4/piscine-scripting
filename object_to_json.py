@@ -48,11 +48,11 @@ def create_new_user(registration_str):
     return User()
 
 def user_to_json(user):
+    # If the user has default values, return an empty JSON object
+    if user.username == 'user' and user.email == 'something@mail.com':
+        return '{}'
     user_dict = {
         'username': user.username,
         'email': user.email
     }
-    # If the user has default values, return an empty JSON object
-    if user.username == 'user' and user.email == 'something@mail.com':
-        return '{}'
     return json.dumps(user_dict)
