@@ -32,24 +32,24 @@
 import json
 
 class User:
-    username = 'user'
-    email = 'something@mail.com'
+    def __init__(self, username='user', email='something@mail.com', is_valid=True):
+        self.username = username
+        self.email = email
+        self.is_valid = is_valid
     
 def create_new_user(registration_str):
     try:
         data = json.loads(registration_str)
         if 'username' in data and 'email' in data:
-            user = User()
-            user.username = data['username']
-            user.email = data['email']
-            return user
+            return User(username=data['username'], email=data['email'])
+        else:
+            return User(is_valid=False)
     except json.JSONDecodeError:
-        return User()
-    return User()
+        return User(is_valid=False)
 
 def user_to_json(user):
     # If the user has default values, return an empty JSON object
-    if user.username == 'user' and user.email == 'something@mail.com':
+    if not user.is_valid:
         return '{}'
     user_dict = {
         'username': user.username,
