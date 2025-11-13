@@ -23,14 +23,9 @@
 # $ python test.py
 # ['it', 's', 'not', 'possible', 'you', 'can', 't', 'ask', 'for', 'a', 'raise']
 
-import string
+import re
 
 def tokenize(sentence):
-    # Remove punctuation and special characters
-    translator = str.maketrans('', '', string.punctuation)
-    cleaned_sentence = sentence.translate(translator)
-    
-    # Split into words and convert to lowercase
-    words = cleaned_sentence.lower().split()
-    
-    return words
+    sentence = sentence.lower()
+    tokens = re.split(r"[^a-z0-9]+", sentence)
+    return [token for token in tokens if token]
