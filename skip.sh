@@ -6,4 +6,4 @@
 
 # Write a command line in a skip.sh file that prints the result of a ls -l skipping 1 line out of 2, starting with the first one.
 
-ls -l | -sed -n 'n;p'
+ls -l | sed -n 'n;p'
